@@ -33,6 +33,10 @@ After cleaning I had 5721 rows. Train test split is 80-20 with stratify and rand
 
 This is more than 12 features and more than 500 instances so it matches the assignment limit.
 
+## Live Streamlit App
+
+[Live Streamlit App](https://2025ac05412-phishing-website-classification.streamlit.app/)
+
 ## c. Github Repository Link
 
 https://github.com/2025ac05412-SUHAS/2025AC05412_ML
