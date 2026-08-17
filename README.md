@@ -66,7 +66,7 @@ This saves pickle files in model/, metrics in results/, and test_data.csv.
 Run the app:
 
 ```
-streamlit run app.py
+streamlit run streamlit_app.py
 ```
 
 Then upload test_data.csv, pick a model, click Evaluate.
