@@ -3,7 +3,9 @@
 import pickle
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
 import streamlit as st
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -91,6 +93,24 @@ def validate_uploaded_csv(df, feature_columns):
     return None
 
 
+def plot_confusion_matrix(matrix, class_names, model_name):
+    fig, ax = plt.subplots(figsize=(5.5, 4.5))
+    sns.heatmap(
+        matrix,
+        annot=True,
+        fmt="d",
+        cmap="Blues",
+        xticklabels=class_names,
+        yticklabels=class_names,
+        ax=ax,
+    )
+    ax.set_xlabel("Predicted")
+    ax.set_ylabel("Actual")
+    ax.set_title(f"Confusion Matrix - {model_name}")
+    fig.tight_layout()
+    return fig
+
+
 def round_metrics(df):
     metric_columns = ["Accuracy", "AUC", "Precision", "Recall", "F1 Score", "MCC"]
     display_df = df.copy()
@@ -160,16 +180,21 @@ def main():
     y_score = positive_class_probability(selected_model, X)
     metrics = evaluate_predictions(y_true, y_pred, y_score)
 
-    st.subheader(f"Results: {selected_model_name}")
-
+    st.subheader("Evaluation Metrics")
     metric_columns = st.columns(6)
     for column, (metric_name, value) in zip(metric_columns, metrics.items()):
         column.metric(metric_name, f"{value:.4f}")
 
-    st.subheader("Confusion matrix")
-    labels = list(selected_model.classes_)
+    labels = [-1, 1]
     matrix = confusion_matrix(y_true, y_pred, labels=labels)
-    class_names = [metadata["class_labels"].get(label, str(label)) for label in labels]
+    class_names = ["Phishing", "Legitimate"]
+
+    st.subheader("Graphical Confusion Matrix")
+    fig = plot_confusion_matrix(matrix, class_names, selected_model_name)
+    st.pyplot(fig)
+    plt.close(fig)
+
+    st.subheader("Numerical Confusion Matrix")
     confusion_df = pd.DataFrame(
         matrix,
         index=[f"Actual {name}" for name in class_names],
@@ -177,7 +202,7 @@ def main():
     )
     st.dataframe(confusion_df, use_container_width=True)
 
-    st.subheader("Classification report")
+    st.subheader("Classification Report")
     report = classification_report(
         y_true,
         y_pred,
@@ -189,7 +214,7 @@ def main():
     report_df = pd.DataFrame(report).transpose()
     st.dataframe(report_df, use_container_width=True)
 
-    st.subheader("Comparison on uploaded data")
+    st.subheader("Comparison on Uploaded Data")
     uploaded_comparison_rows = []
     for model_name, model in models.items():
         predictions = model.predict(X)
