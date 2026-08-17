@@ -39,7 +39,7 @@ This is more than 12 features and more than 500 instances so it matches the assi
 
 ## c. Github Repository Link
 
-https://github.com/2025ac05412-SUHAS/2025AC05412_ML
+https://github.com/2025ac05412-SUHAS/2025AC05412_Machine-Learning
 
 ## d. Models used
 
