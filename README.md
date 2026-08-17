@@ -4,13 +4,26 @@ Phishing website classification using 5 models and a Streamlit app.
 
 Student ID: 2025AC05412
 
+This project classifies websites as phishing or legitimate using URL, domain, webpage, security, traffic and related website features.
+
 ## a. Problem statement
 
 I used a phishing websites dataset and trained 5 classification models to check if a site is phishing or legitimate. The target column is `Result` where -1 means phishing and 1 means legitimate. After training I saved the models as pickle files and built a Streamlit page so the test csv can be uploaded and the metrics can be compared.
 
+## Dataset
+
+**Phishing Websites Data**
+
+Kaggle: [https://www.kaggle.com/datasets/sai10py/phishing-websites-data](https://www.kaggle.com/datasets/sai10py/phishing-websites-data)
+
+The dataset contains 11,055 instances, 30 input features, and the target variable `Result`.
+
+- `Result = 1` : legitimate website
+- `Result = -1` : phishing website
+
 ## b. Dataset description
 
-Dataset: UCI Phishing Websites
+Dataset: Phishing Websites Data — Kaggle
 
 I downloaded it from a public source. Original file had 11055 rows and 30 features plus the Result column. All features were already numeric (-1, 0, 1). No missing values.
 
