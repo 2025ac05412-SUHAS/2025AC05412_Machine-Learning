@@ -22,7 +22,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
 
 PROJECT_ROOT = Path(__file__).resolve().parent
-DATA_PATH = PROJECT_ROOT / "archive" / "Phishing_Websites_Data.csv"
+DATA_PATH = PROJECT_ROOT / "phishing-websites-data" / "Phishing_Websites_Data.csv"
 MODEL_DIR = PROJECT_ROOT / "model"
 RESULTS_DIR = PROJECT_ROOT / "results"
 TEST_DATA_PATH = PROJECT_ROOT / "test_data.csv"
